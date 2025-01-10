@@ -1,0 +1,75 @@
+
+# 1. The files are copied to the IBM server in a CS131/WS2
+     $ cp /mnt/scratch/CS131_billa/billandreopoulos/downloaded_tweets_extend_nolf.ASCII.CLEAN.tsv .
+     $ cp /mnt/scratch/CS131_billa/billandreopoulos/downloaded_tweets_extend_original_ids_nolf.ASCII.CLEAN.tsv .
+
+
+
+# 2. grep replied_to results are too long, they are redirected to 2 text files:
+
+     $ grep "replied_to" /mnt/scratch/CS131_billa/billandreopoulos/downloaded_tweets_extend_nolf.ASCII.CLEAN.tsv > replied_to_file1.txt
+     $ grep "replied_to" /mnt/scratch/CS131_billa/billandreopoulos/downloaded_tweets_extend_original_ids_nolf.ASCII.CLEAN.tsv > replied_to_file2.txt
+                # replied_to_file1.txt and replied_to_file2.txt
+
+# 3. grep retweeted results are too long, they are redirected to 2 text files:
+     $ grep "retweeted" /mnt/scratch/CS131_billa/billandreopoulos/downloaded_tweets_extend_nolf.ASCII.CLEAN.tsv > retweeted_file1.txt
+     $ grep "retweeted" /mnt/scratch/CS131_billa/billandreopoulos/downloaded_tweets_extend_original_ids_nolf.ASCII.CLEAN.tsv > retweeted_file2.txt
+
+            #retweeted_file1.txt, retweeted_file2.txt
+
+# 4. line counts for replied_to_file1:
+    $ wc -l replied_to_file1.txt
+        15502 replied_to_file1.txt
+
+    # word counts for replied_to_file1:
+    $ wc -w replied_to_file1.txt
+        530350 replied_to_file1.txt
+
+    #  line counts for replied_to_file2:
+        wc -l replied_to_file2.txt
+          14896 replied_to_file2.txt
+
+    #  word counts for replied_to_file2:
+        $ wc -w replied_to_file2.txt
+        620310 replied_to_file2.txt
+
+    #  line counts for retweeted_file1:
+        $ wc -1 retweeted_file1.txt
+        178052 retweeted_file1.txt
+
+    #   word counts for retweeted_file1:
+        $ wc -w retweeted_file1.txt
+        4973621 retweeted_file1.txt
+
+    #   line counts for retweeted_file2:
+        $ wc -l retweeted_file2.txt
+        30 retweeted_file2.txt
+
+    #   word counts for retweeted_file2:
+       $ wc -w retweeted_file2.txt
+        1071 retweeted_file2.txt
+
+# 5. Redirect output files from #4 using these commands:
+
+# Redirect word line & word count from replied_to_file1.txt
+    wc -l replied_to_file1.txt > counts.txt
+    wc -w replied_to_file1.txt >> counts.txt
+
+# Redirect word line & word count from replied_to_file2.txt
+    wc -l replied_to_file2.txt >> counts.txt
+    wc -w replied_to_file2.txt >> counts.txt
+
+  # Redirect word line & word count from retweeted_file1.txt
+    wc -l retweeted_file1.txt >> counts.txt
+    wc -w retweeted_file1.txt >> counts.txt
+
+ # Redirect word line & word count from retweeted_file2.txt
+    wc -l retweeted_file2.txt >> counts.txt
+    wc -w retweeted_file2.txt >> counts.txt
+
+# 5. Edited counts.txt
+
+# 6. history saved into cmds.log using the following command:
+     history > cmds.log
+
+

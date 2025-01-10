@@ -1,0 +1,100 @@
+Script started on 2024-09-27 04:17:34-04:00
+bash-4.4$ .vi .bashrc^M
+alias l='ls -latr'
+alias w='ls -la | wc'
+bash-4.4$ l
+total 106428
+drwxr-xr-x 2 SemharTesfagergshTeklehaimanot billa     4096 Sep 16 03:02 WS2
+drwxr-xr-x 2 SemharTesfagergshTeklehaimanot billa     4096 Sep 16 03:02 WS1
+-rw-r--r-- 1 SemharTesfagergshTeklehaimanot billa      624 Sep 16 03:02 .gitignore
+drwxr-xr-x 2 SemharTesfagergshTeklehaimanot billa     4096 Sep 16 03:02 A1
+drwxr-xr-x 2 SemharTesfagergshTeklehaimanot billa     4096 Sep 16 03:39 WS3
+drwxr-xr-x 8 SemharTesfagergshTeklehaimanot billa     4096 Sep 16 04:04 .git
+-rw-r--r-- 1 SemharTesfagergshTeklehaimanot billa 63693814 Sep 18 12:48 downloaded_tweets_extend_nolf.ASCII.CLEAN.tsv
+-rw-r--r-- 1 SemharTesfagergshTeklehaimanot billa 45243193 Sep 18 12:48 downloaded_tweets_extend_original_ids_nolf.ASCII.CLEAN.tsv
+drwxr-xr-x 2 SemharTesfagergshTeklehaimanot billa     4096 Sep 18 13:20 WS44
+prw-r--r-- 1 SemharTesfagergshTeklehaimanot billa        0 Sep 23 17:28 my_pipe
+drwxr-xr-x 9 SemharTesfagergshTeklehaimanot billa     4096 Sep 27 02:12 .
+drwx------ 9 SemharTesfagergshTeklehaimanot billa     4096 Sep 27 04:14 ..
+drwxr-xr-x 2 SemharTesfagergshTeklehaimanot billa     4096 Sep 27 04:18 WS4
+bash-4.4$ cd WS4
+
+
+#1 Top 10 users who replied the most to other users
+
+bash-4.4$ cat ~/downloaded_tweets_extend_*tsv | grep replied_to | grep -v UNKNOWNUSER | cut -f 2 | sort | uniq -c | sort -n -k 1 | tail -10
+    397 825088670403145728
+    454 1387010761994682371
+    545 309570860
+    551 804582780298412032
+    618 25868334
+    632 578601744
+    645 536646582
+    678 302984766
+   1041 199452338
+   1406 1473384969699569669
+
+
+#2 Top 10 users who got the most replies from other users
+
+bash-4.4$ cat ~/downloaded_tweets_extend_*tsv | grep replied_to | grep -v UNKNOWNUSER | cut -f 7 | sort | uniq -c | sort -n -k 1 | tail -10
+     89 1298372735383605249
+     91 1201670995435646976
+    107 1028833460
+    116 1229752606714728454
+    203 380648579
+    229 1044285651812839424
+    230 18831926
+    279 309570860
+    440 1266038659
+    616 25868334
+
+# 3.  Top 10 users who retweeted the most other tweets
+
+bash-4.4$ cat ~/downloaded_tweets_extend_*tsv | grep type=retweeted | grep -v UNKNOWNUSER | cut -f 2 | sort | uniq -c | sort -n -k 1 | tail -10
+   2053 2783787047
+   2065 45379403
+   2118 2156874201
+   2156 1275462892591202304
+   2426 15227349
+   2453 3308894989
+   2606 2189523500
+   3195 42769304
+   3453 309570860
+   6310 968008274003005440
+
+# 4) top 10 users who got retweeted the most from other users (for this you need both Twitter files above, use fgrep)
+
+
+bash-4.4$ cat ~/downloaded_tweets_extend_*tsv | grep type=retweeted | grep -v UNKNOWNUSER | cut -f 1 > rbash-4.4$ cat ~/downloaded_tweets_extend_*tsv | grep type=retweeted | grep -v UNKNOWNUSER | sed "s/^.*ReferencedTweet id=//" | sed "s/ type=retweeted.*$//g" > retwreeted.ids.txt
+bash-4.4$ vi retwreeted.ids.txt
+bash-4.4$ wc retwreeted.ids.txt
+ 178045  178045 3560769 retreeted.ids.txt
+ bash-4.4$ for i in `cat retreeted.ids.txt` ; do grep "^$i\t" do^C
+ bash-4.4$ for i in `cat retreeted.ids.txt` ; do grep "^$i\t" downloaded_tweets_extend_*.tsv ; done
+ > original_tweets_retweeted.txt
+ bash-4.4$ fgrep -f retweeted.ids.txt downloaded_tweets_extend_*.tsv | cut -f2 | sort | uniq -c | sort -nr | head -10 > original_tweets_retweeted.txt
+
+
+ bash-4.4$ ca 6310 968008274003005440
+     3453 309570860
+     3195 42769304
+     2606 2189523500
+     2453 3308894989
+     2426 15227349
+     2156 1275462892591202304
+     2118 2156874201
+     2065 45379403
+     2053 2783787047
+
+ bash-4.4$ history cmds.log
+ bash: history: cmds.log: numeric argument required
+ bash-4.4$ history | tail -150 > cmds.log
+ bash-4.4$ exit
+ There are stopped jobs.
+ bash-4.4$ exit
+ Script done on 2024-09-27 05:30:18-04:00
+
+
+
+

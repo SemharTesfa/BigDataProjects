@@ -1,0 +1,119 @@
+ mkdir WS3
+  869  cd WS3
+  870  ls
+  871  tmux new-session -s homework
+  872  vi ~/.bashrc
+  873  source ~/.bashrc
+  874  cd ..
+  875  pws
+  876  pwd
+  877  cd WS3
+  878  cp /mnt/scratch/CS131_billa/source_directory/downloaded_tweets_extend_nolf.ASCII.CLEAN.tsv .
+  879  clear
+  880  cp /mnt/scratch/CS131_billa/billandreopoulos/downloaded_tweets_extend_nolf.ASCII.CLEAN.tsv
+  881  cp /mnt/scratch/CS131_billa/billandreopoulos/downloaded_tweets_extend_nolf.ASCII.CLEAN.tsv .
+  882  cp /mnt/scratch/CS131_billa/billandreopoulos/downloaded_tweets_extend_original_ids_nolf.ASCII.CLEAN.tsv .
+  883  l
+  884  w
+  885  cut -d$'\t' -fX downloaded_tweets_extend_nolf.ASCII.CLEAN.tsv | sort | uniq -c | sort -nr | head -30
+  886  cut downloaded_tweets_extend_nolf.ASCII.CLEAN.tsv head
+  887  vi downloaded_tweets_extend_nolf.ASCII.CLEAN.tsv
+  888  cut -f4 downloaded_tweets_extend_nolf.ASCII.CLEAN.tsv | sort | uniq -c | sort -nr | head -30
+  889  cut -f4 downloaded_tweets_extend_original_ids_nolf.ASCII.CLEAN.tsv | sort | uniq -c | sort -nr | head -30
+  890      868 Russia
+  891      854 BREAKING
+  892      833 "FBPE,FollowBackFriday"
+  893      712 Omicron
+  894      584 StandWithUkraine
+  895      528 COVID
+  896      498 BA2
+  897      459 PMQs
+  898      459 Mariupol
+  899      452 Auschwitz
+  900      439 Brexit
+  901      409 ???????_?????_???????
+  902      403 Ethiopia
+  903      387 TikTok
+  904      379 COVIDisAirborne
+  905      367 AlboForPM
+  906      365 Kyiv
+  907      344 Putin
+  908      343 "Innovation,FutureTech"
+  909      334 Covid19
+  910      291 "Entrepreneurship,Tech"
+  911      289 Partygate
+  912      283 MitchPlease
+  913  bash-4.4$ cut -f4 downloaded_tweets_extend_original_ids_nolf.ASCII.CLEAN.tsv | sort | uniq -c | sort -nr | head -30
+  914     6055
+  915     3046 auspol
+  916     2028 Ukraine
+  917     1461 COVID19
+  918     1237 LongCovid
+  919      837 StandWithUkraine
+  920      580 BREAKING
+  921      551 cdnpoli
+  922      499 sayftychat
+  923      484 PMQs
+  924      440 bcpoli
+  925      435 Auschwitz
+  926      356 Russia
+  927      341 Omicron
+  928      338 AlboForPM
+  929      310 insiders
+  930      265 COVIDisAirborne
+  931      265 COVID
+  932      254 onpoli
+  933      248 "Russia,Ukraine"
+  934      247 ???????_?????_???????
+  935      237 abc730
+  936      234 ableg
+  937      221 SOTU
+  938      217 ausvotes
+  939      212 DemVoice1
+  940      209 JohnsonOut
+  941      207 ChefsForUkraine
+  942      184 Mariupol
+  943      177 Kyiv
+  944  clear
+  945  vi ws3.txt
+  946  bash-4.4$ cut -f4 downloaded_tweets_extend_original_ids_nolf.ASCII.CLEAN.tsv | sort | uniq -c | sort -nr | head -30
+  947  clear
+  948  script ws3.txt
+  949  cs cs131
+  950  cd cs131
+  951  ls
+  952  rm ws3.txt
+  953  cd WS3
+  954  tmux new-session -s homework
+  955  rm ws3.txt
+  956  tmux kill-session -t homework
+  957  cd ..
+  958  tmux kill-session -t homework
+  959  tmux ls
+  960  cd WS3
+  961  ls
+  962  tmux new-session -s homework
+  963  vi ~/.bashrc
+  964  source ~/.bashrc
+  965  ls
+  966  cut -f4 downloaded_tweets_extend_nolf.ASCII.CLEAN.tsv | sort | uniq -c | sort -nr | head -30
+  967  cut -f4 downloaded_tweets_extend_nolf.ASCII.CLEAN.tsv | tr -s ' ' | sort | uniq -c | sort -nr | head -30
+  968  cut -f4 downloaded_tweets_extend_nolf.ASCII.CLEAN.tsv | tr ',' '\n' | sort | uniq -c | sort -nr | head -30
+  969  clear
+  970  ls
+  971  cut -f4 downloaded_tweets_extend_original_ids_nolf.ASCII.CLEAN.tsv | sort | uniq -c | sort -nr | head -30
+  972  head -n 1 downloaded_tweets_extend_nolf.ASCII.CLEAN.tsv
+  973  vi ~/.bashrc
+  974  source ~/.bashrc
+  975  cut -f4 downloaded_tweets_extend_nolf.ASCII.CLEAN.tsv | sort | uniq -c | sort -nr | head -30
+  976  l
+  977  cut -f4 downloaded_tweets_extend_original_ids_nolf.ASCII.CLEAN.tsv | sort | uniq -c | sort -nr | head -30
+  978  awk -F'\t' '{print $4, $8}' downloaded_tweets_extend_nolf.ASCII.CLEAN.tsv | sort | uniq -c | sort -nr | head -30
+  979  cut -f4 downloaded_tweets_extend_nolf.ASCII.CLEAN.tsv | sort | uniq -c | sort -nr | head -30
+  980  cut -f8 downloaded_tweets_extend_nolf.ASCII.CLEAN.tsv | head -10
+  981  awk -F'\t' '$6 ~ /retweeted/ {print $4}' downloaded_tweets_extend_nolf.ASCII.CLEAN.tsv | sort | uniq -c | sort -nr | head -30
+  982  awk -F'\t' '$6 ~ /replied_to/ {print $4}' downloaded_tweets_extend_nolf.ASCII.CLEAN.tsv | sort | uniq -c | sort -nr | head -30
+  983  awk -F'\t' '$6 ~ /quoted/ {print $4}' downloaded_tweets_extend_nolf.ASCII.CLEAN.tsv | sort | uniq -c | sort -nr | head -30
+  984  history > cmds.log
+  985  history | sed -n '869, 984p' > cmds.log
+

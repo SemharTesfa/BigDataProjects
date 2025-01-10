@@ -1,0 +1,10 @@
+  170  git clone git@bitbucket.org:semhar_cs131/cs131.git
+  171  cd cs131
+  172  ls -latr
+  173  mkdir WS1
+  174  mkdir WS2
+  175  cd WS1
+  176  git add .
+  177  tail -10 cmds.log > cmds2.log
+  178  git add .
+  179  history > cmds.log

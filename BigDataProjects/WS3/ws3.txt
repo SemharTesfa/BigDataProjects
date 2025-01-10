@@ -1,0 +1,205 @@
+  826  script ws3.txt
+  827  tmux
+  828  tmux ls
+  829  tmux kill-session -t homework
+  830  cd cs131
+  831  ls
+  832  WS3
+  833  cd WS3
+  834  ls
+  835  cd ..
+  836  tmux new-session -s homework
+  837  ls
+  838  cd WS2
+  839  ls
+  840  cd WS3
+  841  cd ..
+  842  ls
+  843  cd WS3
+  844  ls
+  845  cd ..
+  846  clear
+  847  tmux new-session -s homework
+  848  tmux ls
+  849  tmux kill-session -t homework
+  850  tmx ls
+  851  clear
+  852  tmux new-session -s homework
+  853  tmx ls
+  854  clear
+  855  ls
+  856  vi ws3.txt
+  857  cd cs131
+  858  ls
+  859  cd A1
+  860  ls
+  861  cd A11
+  862  cd ..
+  863  cd A11
+  864  ls
+  865  clear
+  866  cd ..
+  867  mkdir WS3
+  868  cd WS3
+  869  ls
+  870  tmux new-session -s homework
+  871  vi ~/.bashrc
+  872  source ~/.bashrc
+  873  cd ..
+  874  pws
+  875  pwd
+  876  cd WS3
+  877  cp /mnt/scratch/CS131_billa/source_directory/downloaded_tweets_extend_nolf.ASCII.CLEAN.tsv .
+  878  clear
+  879  cp /mnt/scratch/CS131_billa/billandreopoulos/downloaded_tweets_extend_nolf.ASCII.CLEAN.tsv
+  880  cp /mnt/scratch/CS131_billa/billandreopoulos/downloaded_tweets_extend_nolf.ASCII.CLEAN.tsv .
+  881  cp /mnt/scratch/CS131_billa/billandreopoulos/downloaded_tweets_extend_original_ids_nolf.ASCII.CLEAN.tsv .
+  882  l
+  883  w
+  884  cut -d$'\t' -fX downloaded_tweets_extend_nolf.ASCII.CLEAN.tsv | sort | uniq -c | sort -nr | head -30
+  885  cut downloaded_tweets_extend_nolf.ASCII.CLEAN.tsv head
+  886  vi downloaded_tweets_extend_nolf.ASCII.CLEAN.tsv
+  887  cut -f4 downloaded_tweets_extend_nolf.ASCII.CLEAN.tsv | sort | uniq -c | sort -nr | head -30
+  888  cut -f4 downloaded_tweets_extend_original_ids_nolf.ASCII.CLEAN.tsv | sort | uniq -c | sort -nr | head -30
+  889      868 Russia
+  890      854 BREAKING
+  891      833 "FBPE,FollowBackFriday"
+  892      712 Omicron
+  893      584 StandWithUkraine
+  894      528 COVID
+  895      498 BA2
+  896      459 PMQs
+  897      459 Mariupol
+  898      452 Auschwitz
+  899      439 Brexit
+  900      409 ???????_?????_???????
+  901      403 Ethiopia
+  902      387 TikTok
+  903      379 COVIDisAirborne
+  904      367 AlboForPM
+  905      365 Kyiv
+  906      344 Putin
+  907      343 "Innovation,FutureTech"
+  908      334 Covid19
+  909      291 "Entrepreneurship,Tech"
+  910      289 Partygate
+  911      283 MitchPlease
+  912  bash-4.4$ cut -f4 downloaded_tweets_extend_original_ids_nolf.ASCII.CLEAN.tsv | sort | uniq -c | sort -nr | head -30
+  913     6055
+  914     3046 auspol
+  915     2028 Ukraine
+  916     1461 COVID19
+  917     1237 LongCovid
+  918      837 StandWithUkraine
+  919      580 BREAKING
+  920      551 cdnpoli
+  921      499 sayftychat
+  922      484 PMQs
+  923      440 bcpoli
+  924      435 Auschwitz
+  925      356 Russia
+  926      341 Omicron
+  927      338 AlboForPM
+  928      310 insiders
+  929      265 COVIDisAirborne
+  930      265 COVID
+  931      254 onpoli
+  932      248 "Russia,Ukraine"
+  933      247 ???????_?????_???????
+  934      237 abc730
+  935      234 ableg
+  936      221 SOTU
+  937      217 ausvotes
+  938      212 DemVoice1
+  939      209 JohnsonOut
+  940      207 ChefsForUkraine
+  941      184 Mariupol
+  942      177 Kyiv
+  943  clear
+  944  vi ws3.txt
+  945  bash-4.4$ cut -f4 downloaded_tweets_extend_original_ids_nolf.ASCII.CLEAN.tsv | sort | uniq -c | sort -nr | head -30
+  946  clear
+  947  script ws3.txt
+  948  cs cs131
+  949  cd cs131
+  950  ls
+  951  rm ws3.txt
+  952  cd WS3
+  953  tmux new-session -s homework
+  954  rm ws3.txt
+  955  tmux kill-session -t homework
+  956  cd ..
+  957  tmux kill-session -t homework
+  958  tmux ls
+  959  cd WS3
+  960  ls
+  961  tmux new-session -s homework
+  962  vi ~/.bashrc
+  963  source ~/.bashrc
+  964  ls
+  965  cut -f4 downloaded_tweets_extend_nolf.ASCII.CLEAN.tsv | sort | uniq -c | sort -nr | head -30
+  966  cut -f4 downloaded_tweets_extend_nolf.ASCII.CLEAN.tsv | tr -s ' ' | sort | uniq -c | sort -nr | head -30
+  967  cut -f4 downloaded_tweets_extend_nolf.ASCII.CLEAN.tsv | tr ',' '\n' | sort | uniq -c | sort -nr | head -30
+  968  clear
+  969  ls
+  970  cut -f4 downloaded_tweets_extend_original_ids_nolf.ASCII.CLEAN.tsv | sort | uniq -c | sort -nr | head -30
+  971  head -n 1 downloaded_tweets_extend_nolf.ASCII.CLEAN.tsv
+  972  vi ~/.bashrc
+  973  source ~/.bashrc
+  974  cut -f4 downloaded_tweets_extend_nolf.ASCII.CLEAN.tsv | sort | uniq -c | sort -nr | head -30
+  975  l
+  976  cut -f4 downloaded_tweets_extend_original_ids_nolf.ASCII.CLEAN.tsv | sort | uniq -c | sort -nr | head -30
+  977  awk -F'\t' '{print $4, $8}' downloaded_tweets_extend_nolf.ASCII.CLEAN.tsv | sort | uniq -c | sort -nr | head -30
+  978  cut -f4 downloaded_tweets_extend_nolf.ASCII.CLEAN.tsv | sort | uniq -c | sort -nr | head -30
+  979  cut -f8 downloaded_tweets_extend_nolf.ASCII.CLEAN.tsv | head -10
+  980  awk -F'\t' '$6 ~ /retweeted/ {print $4}' downloaded_tweets_extend_nolf.ASCII.CLEAN.tsv | sort | uniq -c | sort -nr | head -30
+  981  awk -F'\t' '$6 ~ /replied_to/ {print $4}' downloaded_tweets_extend_nolf.ASCII.CLEAN.tsv | sort | uniq -c | sort -nr | head -30
+  982  awk -F'\t' '$6 ~ /quoted/ {print $4}' downloaded_tweets_extend_nolf.ASCII.CLEAN.tsv | sort | uniq -c | sort -nr | head -30
+  983  history > cmds.log
+  984  script ws3.txt
+  985  cd cs 131
+  986  cd cs131
+  987  ls
+  988  cd WS3
+  989  ls
+  990  vi ws3.txt
+  991  rm ws3.txt
+  992  tmux kill-session -t homework
+  993  tmux ls
+  994  tmux new-session -s homework
+  995  vi ws3.txt
+  996  tmux new-session -s homework
+  997  vi ~/.bashrc
+  998  source ~/.bashrc
+  999  cut -f4 downloaded_tweets_extend_nolf.ASCII.CLEAN.tsv | sort | uniq -c | sort -nr | head -30
+ 1000  awk -F'\t' '$6 ~ /retweeted/ {print $4}' downloaded_tweets_extend_nolf.ASCII.CLEAN.tsv | sort | uniq -c | sort -nr | head -30
+ 1001  awk -F'\t' '$6 ~ /replied_to/ {print $4}' downloaded_tweets_extend_nolf.ASCII.CLEAN.tsv | sort | uniq -c | sort -nr | head -30
+ 1002  awk -F'\t' '$6 ~ /quoted/ {print $4}' downloaded_tweets_extend_nolf.ASCII.CLEAN.tsv | sort | uniq -c | sort -nr | head -30
+ 1003  cut -f4 downloaded_tweets_extend_original_ids_nolf.ASCII.CLEAN.tsv | sort | uniq -c | sort -nr | head -30
+ 1004  awk -F'\t' '$6 ~ /retweeted/ {print $4}' downloaded_tweets_extend_original_ids_nolf.ASCII.CLEAN.tsv | sort | uniq -c | sort -nr | head -30
+ 1005  awk -F'\t' '$6 ~ /replied_to/ {print $4}' downloaded_tweets_extend_original_ids_nolf.ASCII.CLEAN.tsv | sort | uniq -c | sort -nr | head -30
+ 1006  awk -F'\t' '$6 ~ /quoted/ {print $4}' downloaded_tweets_extend_original_ids_nolf.ASCII.CLEAN.tsv | sort | uniq -c | sort -nr | head -30
+ 1007  history
+bash-4.4$ history 985[K6 1007 > cmds.log
+bash: history: too many arguments
+bash-4.4$ history 986 1007 > cmds.log[C[1@ [1@|[C[1@ [1@s[1@e[1@d[C[1@ [1@-[1@n[C[1@ [1@'[1P[C[C[C[1@,[1P[C[C[C[C[C[1P[1@p[1@'[1@
+bash-4.4$ cat cmds.log
+  995  vi ws3.txt
+  996  tmux new-session -s homework
+  997  vi ~/.bashrc
+  998  source ~/.bashrc
+  999  cut -f4 downloaded_tweets_extend_nolf.ASCII.CLEAN.tsv | sort | uniq -c | sort -nr | head -30
+ 1000  awk -F'\t' '$6 ~ /retweeted/ {print $4}' downloaded_tweets_extend_nolf.ASCII.CLEAN.tsv | sort | uniq -c | sort -nr | head -30
+ 1001  awk -F'\t' '$6 ~ /replied_to/ {print $4}' downloaded_tweets_extend_nolf.ASCII.CLEAN.tsv | sort | uniq -c | sort -nr | head -30
+ 1002  awk -F'\t' '$6 ~ /quoted/ {print $4}' downloaded_tweets_extend_nolf.ASCII.CLEAN.tsv | sort | uniq -c | sort -nr | head -30
+ 1003  cut -f4 downloaded_tweets_extend_original_ids_nolf.ASCII.CLEAN.tsv | sort | uniq -c | sort -nr | head -30
+ 1004  awk -F'\t' '$6 ~ /retweeted/ {print $4}' downloaded_tweets_extend_original_ids_nolf.ASCII.CLEAN.tsv | sort | uniq -c | sort -nr | head -30
+ 1005  awk -F'\t' '$6 ~ /replied_to/ {print $4}' downloaded_tweets_extend_original_ids_nolf.ASCII.CLEAN.tsv | sort | uniq -c | sort -nr | head -30
+ 1006  awk -F'\t' '$6 ~ /quoted/ {print $4}' downloaded_tweets_extend_original_ids_nolf.ASCII.CLEAN.tsv | sort | uniq -c | sort -nr | head -30
+ 1007  history
+ 1008  history 986 1007 > cmds.log
+ 1009  history | sed -n '986,1007p' > cmds.log
+bash-4.4$ exit
+
+Script done on 2024-09-16 02:24:41-04:00
+

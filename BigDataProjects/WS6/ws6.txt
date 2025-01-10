@@ -1,0 +1,74 @@
+bash-4.4$ ls
+downloaded_tweets_extend_nolf.ASCII.CLEAN.tsv               ws6.txt
+downloaded_tweets_extend_original_ids_nolf.ASCII.CLEAN.tsv
+bash-4.4$
+bash-4.4$
+
+# Combine the Files
+# Combine the two files into combined_retweets.txt:
+bash-4.4$ cat downloaded_tweets_extend*_nolf.ASCII.CLEAN.tsv > combined_retweets.txt
+
+# Verify the combined file:
+bash-4.4$ wc -l combined_retweets.txt
+376899 combined_retweets.txt
+bash-4.4$
+bash-4.4$
+bash-4.4$
+
+
+# Generate Subsamples from the Combined File
+# Use the combined_retweets.txt file to create subsamples.
+
+bash-4.4$ total_lines=$(wc -l < combined_retweets.txt)
+bash-4.4$
+bash-4.4$ for x in {1..10}; do
+>     sample_size=$(echo "$total_lines * $x / 100" | bc | cut -d'.' -f1)
+>     output_file="combined_retweets_subsample_$x.tsv"
+>     shuf combined_retweets.txt | head -n "$sample_size" > "$output_file"
+>
+>     symlink="combined_retweets_subsam.$x"
+>     if [ -L "$symlink" ]; then
+>         rm "$symlink"
+>     fi
+>     ln -s "$output_file" "$symlink"
+> done
+bash-4.4$
+bash-4.4$
+
+# Verify Subsamples
+# The combined file likely has 376,890 lines (since 10% = 37,689).
+# The line counts for subsamples are correct:
+# 1% = 3,768, 2% = 7,537, 3% = 11,306... up to 10% = 37,689.
+
+bash-4.4$ wc -l combined_retweets_subsample_*.tsv
+   37689 combined_retweets_subsample_10.tsv
+    3768 combined_retweets_subsample_1.tsv
+    7537 combined_retweets_subsample_2.tsv
+   11306 combined_retweets_subsample_3.tsv
+   15075 combined_retweets_subsample_4.tsv
+   18844 combined_retweets_subsample_5.tsv
+   22613 combined_retweets_subsample_6.tsv
+   26382 combined_retweets_subsample_7.tsv
+   30151 combined_retweets_subsample_8.tsv
+   33920 combined_retweets_subsample_9.tsv
+  207285 total
+bash-4.4$
+
+
+# Verify Symbolic Links
+# Check the symbolic links point to the correct subsample files:
+bash-4.4$ ls -l | grep combined_retweets_subsam
+lrwxrwxrwx 1 SemharTesfagergshTeklehaimanot billa        33 Nov 25 16:20 combined_retweets_subsam.1 -> combined_retweets_subsample_1.tsv
+lrwxrwxrwx 1 SemharTesfagergshTeklehaimanot billa        34 Nov 25 16:20 combined_retweets_subsam.10 -> combined_retweets_subsample_10.tsv
+lrwxrwxrwx 1 SemharTesfagergshTeklehaimanot billa        33 Nov 25 16:20 combined_retweets_subsam.2 -> combined_retweets_subsample_2.tsv
+lrwxrwxrwx 1 SemharTesfagergshTeklehaimanot billa        33 Nov 25 16:20 combined_retweets_subsam.3 -> combined_retweets_subsample_3.tsv
+lrwxrwxrwx 1 SemharTesfagergshTeklehaimanot billa        33 Nov 25 16:20 combined_retweets_subsam.4 -> combined_retweets_subsample_4.tsv
+lrwxrwxrwx 1 SemharTesfagergshTeklehaimanot billa        33 Nov 25 16:20 combined_retweets_subsam.5 -> combined_retweets_subsample_5.tsv
+lrwxrwxrwx 1 SemharTesfagergshTeklehaimanot billa        33 Nov 25 16:20 combined_retweets_subsam.6 -> combined_retweets_subsample_6.tsv
+lrwxrwxrwx 1 SemharTesfagergshTeklehaimanot billa        33 Nov 25 16:20 combined_retweets_subsam.7 -> combined_retweets_subsample_7.tsv
+lrwxrwxrwx 1 SemharTesfagergshTeklehaimanot billa        33 Nov 25 16:20 combined_retweets_subsam.8 -> combined_retweets_subsample_8.tsv
+lrwxrwxrwx 1 SemharTesfagergshTeklehaimanot billa        33 Nov 25 16:20 combined_retweets_subsam.9 -> combined_retweets_subsample_9.tsv
+
+
+
+

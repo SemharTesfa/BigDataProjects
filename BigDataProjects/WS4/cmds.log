@@ -1,0 +1,50 @@
+  979  rm ws4.txt
+  980  ls
+  981  tmux new-session homework
+  982  64;1;2;4;6;9;11;15;21;22;28;29c
+  983  script ws4.txt
+  984  ./bashrc
+  985  ./bashrc/
+  986  alias l = 'ls =latr'
+  987  .bashrc
+  988  vi .bashrc
+  989  pwd
+  990  cd ..
+  991  l
+  992  cat ~/downloaded_tweets_extend_*.tsv | grep replied_to | grep -v UNKNOWNUSER | cut -f 2 | sort | uniq -c | sort -n -k 1 | tail -10
+  993  cat ~/downloaded_tweets_extend_*.tsv | grep replied_to | grep -v UNKNOWNUSER | cut -f 7 | sort | uniq -c | sort -n -k 1 | tail -10
+  994  cat ~/downloaded_tweets_extend_*.tsv | grep=retweeted | grep -v UNKNOWNUSER | cut -f 2 | sort | uniq -c | sort -n -k 1 | tail -10
+  995  cat ~/downloaded_tweets_extend_*.tsv | grep type=retweeted | grep -v UNKNOWNUSER | cut -f 2 | sort | uniq -c | sort -n -k 1 | tail -10
+  996  vi .bashrc
+  997  l
+  998  cd ..
+  999  l
+ 1000* 
+ 1001  cat downloaded_tweets_extend_*tsv | grep -v UNKNOWNUSER | cut -f 2 | sort | uniq -c | sort -n -k | tail -10
+ 1002  cat ~/downloaded_tweets_extend_*tsv | grep replied_to | grep -v UNKNOWNUSER | cut -f 2 | sort | uniq -c | sort -n -k | tail -10
+ 1003  cat ~/downloaded_tweets_extend_*tsv | grep replied_to | grep -v UNKNOWNUSER | cut -f 2 | sort | uniq -c | sort -n -k 1 | tail -10
+ 1004  cat ~/downloaded_tweets_extend_*tsv | grep replied_to | grep -v UNKNOWNUSER | cut -f 7 | sort | uniq -c | sort -n -k 1 | tail -10
+ 1005  cat ~/downloaded_tweets_extend_*tsv | grep type=retweeted | grep -v UNKNOWNUSER | cut -f 7 | sort | uniq -c | sort -n -k 1 | tail -10
+ 1006  cat ~/downloaded_tweets_extend_*tsv | grep type=retweeted | grep -v UNKNOWNUSER | cut -f 2 | sort | uniq -c | sort -n -k 1 | tail -10
+ 1007  cat ~/downloaded_tweets_extend_*tsv | grep type=retweeted | grep -v UNKNOWNUSER | cut -f 1 > retweeted.ids.txt
+ 1008  head retweeted.id.txt
+ 1009  head ~/retweeted.id.txt
+ 1010* cat ~/downloaded_tweets_extend_*tsv | grep type=retweeted | grep -v UNKNOWNUSER.ids.txt
+ 1011  cd ..
+ 1012  ls
+ 1013  cd WS4
+ 1014  cp ~/downloaded_tweets_extend_*tsv .
+ 1015  cat ~/downloaded_tweets_extend_*tsv | grep type=retweeted | grep -v UNKNOWNUSER | sed "s/^.*ReferencedTweet id=//" | sed "s/ type=retweeted.*$//g" > retreeted.ids.txt
+ 1016  vi retreeted.ids.txt
+ 1017* 
+ 1018  for i in `cat retreeted.ids.txt` ; do grep "^$i\t" downloaded_tweets_extend_*.tsv ; done
+ 1019  for i in `cat retreeted.ids.txt` ; do grep "^$i\t" downloaded_tweets_extend_*.tsv ; done >  original_tweets_retweeted.txt
+ 1020  for i in `cat retreeted.ids.txt` ; do grep "^$i\t" downloaded_tweets_extend_*.tsv ; done > original_tweets_retweeted.txt
+ 1021  for i in `cat retreeted.ids.txt` ; do grep "$i	" downloaded_tweets_extend_*.tsv ; done > original_tweets_retweeted.txt
+ 1022   for i in `cat retweeted.ids.txt` ; do  grep "^$i\t" downloaded_tweets_extend_*.tsv  ; done > original_tweets_retweeted.txt
+ 1023  fgrep -f retweeted.ids.txt downloaded_tweets_extend_*.tsv | awk -F'\t' '{print $2}' | sort | uniq -c | sort -nr | head -10
+ 1024  vi retweeted.ids.txt
+ 1025  fgrep -f retweeted.ids.txt downloaded_tweets_extend_*.tsv | cut -f2 | sort | uniq -c | sort -nr | head -10 > original_tweets_retweeted.txt
+ 1026  cat original_tweets_retweeted.txt
+ 1027  history cmds.log
+ 1028  history | tail -50 > cmds.log

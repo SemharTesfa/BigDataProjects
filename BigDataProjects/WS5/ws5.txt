@@ -1,0 +1,93 @@
+bash-4.4$ cd WS5
+bash-4.4$ ls
+downloaded_tweets_extend_nolf.ASCII.CLEAN.tsv               
+downloaded_tweets_extend_original_ids_nolf.ASCII.CLEAN.tsv    ws5.txt
+
+#1. Create TWEETS directory under home directory
+bash-4.4$ mkdir -p ~/TWEETS
+
+
+# create gettweetbydate.sh and latesttweets.sh files and make them executable
+bash-4.4$ nano gettweetbydate.sh
+bash-4.4$ chmod 755 gettweetbydate.sh
+bash-4.4$
+bash-4.4$ nano latesttweets.sh
+bash-4.4$ chmod 755 latesttweets.sh
+bash-4.4$
+
+# Register the cron job
+bash-4.4$ crontab -e
+crontab: installing new crontab
+bash-4.4$
+bash-4.4$ crontab -l
+*/5 * * * * ~/latesttweets.sh
+
+
+# Verify the setup: run gettweetbydate.sh using the following date
+bash-4.4$ ./gettweetbydate.sh 22-04-29
+bash-4.4$
+
+
+# check contents of TWEETS directory
+bash-4.4$ ls ~/TWEETS
+22-04-29.out
+bash-4.4$
+
+# run latesttweets.sh
+bash-4.4$ ./latesttweets.sh
+bash-4.4$
+
+# check the degug log: (check if the files are created in 5 minutes and deleted)
+bash-4.4$ cat ~/latesttweets_debug.log
+Running latesttweets.sh at Sat Nov  2 19:19:39 EDT 2024
+Finding files in /mnt/scratch/CS131_billa/SemharTesfagergshTeklehaimanot/TWEETS created in the last 5 minutes
+Running latesttweets.sh at Sat Nov  2 19:20:02 EDT 2024
+Finding files in /mnt/scratch/CS131_billa/SemharTesfagergshTeklehaimanot/TWEETS created in the last 5 minutes
+Running latesttweets.sh at Sat Nov  2 19:25:02 EDT 2024
+Finding files in /mnt/scratch/CS131_billa/SemharTesfagergshTeklehaimanot/TWEETS created in the last 5 minutes
+Running latesttweets.sh at Sat Nov  2 19:30:02 EDT 2024
+Finding files in /mnt/scratch/CS131_billa/SemharTesfagergshTeklehaimanot/TWEETS created in the last 5 minutes
+Running latesttweets.sh at Sat Nov  2 19:35:02 EDT 2024
+Finding files in /mnt/scratch/CS131_billa/SemharTesfagergshTeklehaimanot/TWEETS created in the last 5 minutes
+Running latesttweets.sh at Sat Nov  2 19:40:02 EDT 2024
+Finding files in /mnt/scratch/CS131_billa/SemharTesfagergshTeklehaimanot/TWEETS created in the last 5 minutes
+Running latesttweets.sh at Sat Nov  2 19:45:02 EDT 2024
+Finding files in /mnt/scratch/CS131_billa/SemharTesfagergshTeklehaimanot/TWEETS created in the last 5 minutes
+Running latesttweets.sh at Sat Nov  2 19:50:02 EDT 2024
+Finding files in /mnt/scratch/CS131_billa/SemharTesfagergshTeklehaimanot/TWEETS created in the last 5 minutes
+Running latesttweets.sh at Sat Nov  2 19:55:02 EDT 2024
+Finding files in /mnt/scratch/CS131_billa/SemharTesfagergshTeklehaimanot/TWEETS created in the last 5 minutes
+Appending /mnt/scratch/CS131_billa/SemharTesfagergshTeklehaimanot/TWEETS/22-04-29.out to /mnt/scratch/CS131_billa/SemharTesfagergshTeklehaimanot/ALLTWEETS.out
+Deleting /mnt/scratch/CS131_billa/SemharTesfagergshTeklehaimanot/TWEETS/22-04-29.out
+Running latesttweets.sh at Sat Nov  2 19:56:35 EDT 2024
+Finding files in /mnt/scratch/CS131_billa/SemharTesfagergshTeklehaimanot/TWEETS created in the last 5 minutes
+Appending /mnt/scratch/CS131_billa/SemharTesfagergshTeklehaimanot/TWEETS/22-04-29.out to /mnt/scratch/CS131_billa/SemharTesfagergshTeklehaimanot/ALLTWEETS.out
+Deleting /mnt/scratch/CS131_billa/SemharTesfagergshTeklehaimanot/TWEETS/22-04-29.out
+Running latesttweets.sh at Sat Nov  2 20:00:02 EDT 2024
+Finding files in /mnt/scratch/CS131_billa/SemharTesfagergshTeklehaimanot/TWEETS created in the last 5 minutes
+Running latesttweets.sh at Sat Nov  2 20:05:02 EDT 2024
+Finding files in /mnt/scratch/CS131_billa/SemharTesfagergshTeklehaimanot/TWEETS created in the last 5 minutes
+Running latesttweets.sh at Sat Nov  2 20:10:02 EDT 2024
+Finding files in /mnt/scratch/CS131_billa/SemharTesfagergshTeklehaimanot/TWEETS created in the last 5 minutes
+Running latesttweets.sh at Sat Nov  2 20:14:18 EDT 2024
+Finding files in /mnt/scratch/CS131_billa/SemharTesfagergshTeklehaimanot/TWEETS created in the last 5 minutes
+Appending /mnt/scratch/CS131_billa/SemharTesfagergshTeklehaimanot/TWEETS/22-04-29.out to /mnt/scratch/CS131_billa/SemharTesfagergshTeklehaimanot/ALLTWEETS.out
+Deleting /mnt/scratch/CS131_billa/SemharTesfagergshTeklehaimanot/TWEETS/22-04-29.out
+bash-4.4$
+bash-4.4$
+bash-4.4$
+
+
+# check contents of TWEETS directory
+bash-4.4$ ls ~/TWEETS
+
+#As shown above the directory is empty. This shows the program is working successfully. 
+bash-4.4$ exit
+Script done, file is ws5.txt
+
+
+
+
+
+
+

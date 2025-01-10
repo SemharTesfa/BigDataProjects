@@ -1,0 +1,81 @@
+  934  cd WS2
+  935  grep "replied_to" /mnt/scratch/CS131_billa/billandreopoulos/downloaded_tweets_extend_nolf.ASCII.CLEAN.tsv > replied_to_file1.txt
+  936  grep "replied_to" /mnt/scratch/CS131_billa/billandreopoulos/downloaded_tweets_extend_original_ids_nolf.ASCII.CLEAN.tsv > replied_to_file2.txt
+  937  grep "retweeted" /mnt/scratch/CS131_billa/billandreopoulos/downloaded_tweets_extend_nolf.ASCII.CLEAN.tsv > retweeted_file1.txt
+  938  grep "retweeted" /mnt/scratch/CS131_billa/billandreopoulos/downloaded_tweets_extend_original_ids_nolf.ASCII.CLEAN.tsv > retweeted_file2.txt
+  939  ls
+  940  wc -l replied_to_file1.txt
+  941  wc -w replied_to_file1.txt
+  942  wc -l replied_to_file2.txt
+  943  wc -w replied_to_file2.txt
+  944  wc -l retweeted_file1.txt
+  945  wc -w retweeted_file1.txt
+  946  wc -l retweeted_file2.txt
+  947  wc -w retweeted_file2.txt
+  948  wc -l replied_to_file1.txt > counts.txt
+  949  wc -w replied_to_file1.txt >> counts.txt
+  950  wc -1 replied_to_file2.txt >> counts.txt
+  951  wc -l replied_to_file2.txt >> counts.txt
+  952  wc -w replied_to_file2.txt >> counts.txt
+  953  wc -l retweeted_file1.txt >> counts.txt
+  954  wc -w retweeted_file1.txt >> counts.txt
+  955  wc -l retweeted_file2.txt >> counts.txt
+  956  wc -w retweeted_file2.txt >> counts.txt
+  957  cat counts.txt
+  958  vi counts.txt
+  959  cd cs131
+  960  cs WS2
+  961  cd WS2
+  962  ls
+  963  vi counts.txt
+  964  history > cmds.log
+  965  vi cmds.log
+  966  less cmds.log
+  967  head cmds.log
+  968  head -n 50 cmds.log
+  969  history > cmds2.log
+  970  vi cmds2.log
+  971  vi counts.txt
+  972  cd 131
+  973  cd cs131
+  974  cd WS2
+  975  vi counts.txt
+  976  ls
+  977  rm cmds2.log
+  978  rm cmds.log
+  979  history > cmds.log
+  980  vi cmds.log
+  981  history
+  982  cd ..
+  983  git add WS2/cmds.log WS2/counts.txt
+  984  git commit -m "Updated cmds.log and counts.txt in the WS2"
+  985  git push
+  986  git push origin main
+  987  rm counts2.txt
+  988  rm WS2/counts2.txt
+  989  cd WS2
+  990  ls
+  991  vi counts.txt
+  992  cd ..
+  993  git add WS2/cmds.log WS2/counts.txt
+  994  git commit -m "Updated cmds.log and counts.txt in the WS2"
+  995  git push origin main
+  996  less cmds.log
+  997  cs cs131
+  998  cd cs`3`
+  999  cd cs131
+ 1000  cd WS2
+ 1001  history tail cmds.log
+ 1002  history tail -20 cmds.log
+ 1003  history
+ 1004  history | sed -n '809,$p' >> WS2/cmds.log
+ 1005  history | sed -n '809,1003' >> cmds.log
+ 1006  history | sed -n '809,1003p' >> cmds.log
+ 1007  history
+ 1008  vi cmds.log
+ 1009  ls
+ 1010  rm cmds.log
+ 1011  history | sed -n '809,1003p' >> cmds.log
+ 1012  vi cmds.log
+ 1013  rm cmds.log
+ 1014  history | sed -n '920,1003p' >> cmds.log

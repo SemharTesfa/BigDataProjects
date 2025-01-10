@@ -1,0 +1,19 @@
+ 1029  ls
+ 1030  wc -l downloaded_tweets_extend*_subsample_*.tsv
+ 1031  rm downloaded_twe*
+ 1032  ls
+ 1033  clear
+ 1034  cp /mnt/scratch/CS131_billa/billandreopoulos/downloaded_tweets_extend_nolf.ASCII.CLEAN.tsv .
+ 1035  cp /mnt/scratch/CS131_billa/billandreopoulos/downloaded_tweets_extend_original_ids_nolf.ASCII.CLEAN.tsv .
+ 1036  ls
+ 1037  vi ws6.txt
+ 1038  ls
+ 1039  cat downloaded_tweets_extend*_nolf.ASCII.CLEAN.tsv > combined_retweets.txt
+ 1040  wc -l combined_retweets.txt
+ 1041  total_lines=$(wc -l < combined_retweets.txt)
+ 1042  for x in {1..10}; do     sample_size=$(echo "$total_lines * $x / 100" | bc | cut -d'.' -f1);     output_file="combined_retweets_subsample_$x.tsv";     shuf combined_retweets.txt | head -n "$sample_size" > "$output_file";      symlink="combined_retweets_subsam.$x";     if [ -L "$symlink" ]; then         rm "$symlink";     fi;     ln -s "$output_file" "$symlink"; done
+ 1043  ls
+ 1044  wc -l combined_retweets_subsample_*.tsv
+ 1045  ls -l | grep combined_retweets_subsam
+ 1047  vi cmds.log
+ 1048  history | tail -n 20 > cmds.log

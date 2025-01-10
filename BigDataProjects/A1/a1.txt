@@ -1,0 +1,221 @@
+
+
+Script started on 2024-09-10 03:15:01-04:00
+
+# 1. Make directory A1
+
+# Current directory
+bash-4.4$ pwd
+bash-4.4$ cd A1
+/mnt/scratch/CS131_billa/SemharTesfagergshTeklehaimanot/cs131
+
+
+# 2. Path to Home directory
+bash-4.4$ echo $HOME
+/mnt/scratch/CS131_billa/SemharTesfagergshTeklehaimanot
+
+
+# 3. User name
+bash-4.4$ whoami
+SemharTesfagergshTeklehaimanot
+
+# What group you belong to?
+bash-4.4$ groups
+billa
+
+
+# 4. The owner of the group owner of the home directory
+bash-4.4$ ls -ld ~
+drwx------ 7 SemharTesfagergshTeklehaimanot billa 4096 Sep 10 03:12 /mnt/scratch/CS131_billa/SemharTesfagergshTeklehaimanot
+
+# other members in the group
+bash-4.4$ getent group billa
+billa:x:8100:billandre,billandreopoulos,jessicawestfall,AhmedTanzilZaki,BalasaiPrasanthBalasaiAkshitaa,ChauKevinHoang,ChenHenry,DangKelly,HlaingNyunEi,KhantEdward,KidaneEdenElias,KimJiSoo,LaoJasmine,LeQuangHuy,LiJiaying,LiRoyce,LyNhuNgan,MaiAnnePhuong,MeloBryan,MesaAleatha,MujeebPuthenveeduAnwar,NguyenHuuHung,NguyenMark,NguyenQuynhPhuocNhu,PatelVirali,PhamTiffanyTuyetNhung,QuanKietTuan,SemsemRussell,SenoAbelJoash,ShelarShivamSuryakant,ShpilbergRoman,TranRaymondLam,VanJeffrey,VishnumolakalaChandrahasSai,VuongByron,WangAndyDinYuan,XuanWilliam,ZamoraTomasAnthony,ChandramouliIyer,JulienArmaganDitto,EthanAlexanderPark,SemharTesfagergshTeklehaimanot,NikkiHuynh,AyeNyeinKyaw
+bash-4.4$
+
+
+# 5. Create new directory temp and remove permission
+bash-4.4$ mkdir temp
+bash-4.4$ chmod u-x temp
+
+# try cd temp
+bash-4.4$ cd temp
+bash: cd: temp: Permission denied
+# No, permission denied
+
+# No output when ls temp
+bash-4.4$ ls temp
+
+# zero results when ls -l temp
+bash-4.4$ ls -l temp
+total 0
+
+# can not create file inside temp: permission denied
+bash-4.4$ touch test.txt[Ctest.txtetest.txtmtest.txtptest.txt/test.txt
+touch: cannot touch 'temp/test.txt': Permission denied
+
+
+# 6. make directory temp2
+bash-4.4$ mkdir temp2
+
+# mv temp2 changes the name to temp3
+bash-4.4$ mv temp2 temp3
+
+# Cannot cp temp3 to temp4
+cp: -r not specified; omitting directory 'temp3'
+
+# cp the directory to new name
+bash-4.4$ cp -r temp3 temp4
+
+
+
+# 7. using ls get about memory and cupu info
+bash-4.4$ ls /proc | grep -i mem
+iomem
+meminfo
+bash-4.4$ ls /proc | grep -i memcpu
+cpuinfo
+
+
+
+# 8. Using head check the memomory information : total memory = 73080640 kB
+bash-4.4$ head /proc/meminfo
+MemTotal:       73080640 kB
+MemFree:        51841280 kB
+MemAvailable:   59561216 kB
+Buffers:          694720 kB
+Cached:          9811200 kB
+SwapCached:            0 kB
+Active:          7481408 kB
+Inactive:        3495744 kB
+Active(anon):    1536320 kB
+Inactive(anon):  1257792 kB
+
+
+
+# 9. Using head check the cpu info
+bash-4.4$ head /proc/cpuinfo
+processor	: 0
+cpu		: POWER8 (architected), altivec supported
+clock		: 3425.000000MHz
+revision	: 2.1 (pvr 004b 0201)
+processor	: 1
+cpu		: POWER8 (architected), altivec supported
+clock		: 3425.000000MHz
+revision	: 2.1 (pvr 004b 0201)
+
+# using tail check the cpu info
+bash-4.4$ tail head /proc/cpuinfo
+processor	: 255
+cpu		: POWER8 (architected), altivec supported
+clock		: 3425.000000MHz
+revision	: 2.1 (pvr 004b 0201)
+timebase	: 512000000
+platform	: pSeries
+model		: IBM,8247-22L
+machine		: CHRP IBM,8247-22L
+MMU		: Hash
+
+# Count number of processors
+ bash-4.4$ grep -c 'processor' /proc/cpuinfo
+ 256
+
+
+# The speed of the processor:
+bash-4.4$ grep 'clock' /proc/cpuinfoMHz
+clock		: 3425.000000MHz
+clock		: 3425.000000MHz
+clock		: 3425
+clock		: 3425.000000MHz
+
+speed in GHz = 3425MHz/1000 = 3.425 GHz
+
+
+# 10. copying two twitter files to A1 directory
+bash-4.4$ cp /mnt/scratch/CS131_billa/billandreopoulos/downloaded_tweets_extend_nolf.ASCII.CLEAN.tsv .
+bash-4.4$ cp /mnt/scratch/CS131_billa/billandreopoulos/downloaded_tweets_extend_original_ids_nolf.ASCII.CLLEN.tsv .
+bash-4.4$ ls
+downloaded_tweets_extend_nolf.ASCII.CLEAN.tsv		    temp   temp4
+downloaded_tweets_extend_original_ids_nolf.ASCII.CLEAN.tsv  temp3 a1.txt
+
+# The size of the files in GB
+bash-4.4$ du -sh *.tsv
+61M	downloaded_tweets_extend_nolf.ASCII.CLEAN.tsv  =  61/1024 = 0.0596 GB
+44M	downloaded_tweets_extend_original_ids_nolf.ASCII.CLEAN.tsv = 44/1024 = 0.0430 GB
+
+# The line counts
+bash-4.4$ wc -l *.tsv
+231302 downloaded_tweets_extend_nolf.ASCII.CLEAN.tsv
+145597 downloaded_tweets_extend_original_ids_nolf.ASCII.CLEAN.tsv
+376899 total
+
+
+
+
+# 11. Extract the fourth column contains hashtags
+bash-4.4$ cut -f4 downloaded_tweets_extend_nolf.ASCII.CLEAN.tsv | grep -i "great" | wc -l
+138
+
+bash-4.4$ cut -f4 downloaded_tweets_extend_original_ids_nolf.ASCII.CLEAN.tsv | grep -i "great" | wc -l
+202
+
+bash-4.4$ cut -f4 downloaded_tweets_extend_nolf.ASCII.CLEAN.tsv downloaded_tweets_extend_original_ids_nolf.ASCII.CLEAN.tsv | grep -i "great" | wc -l
+340
+
+
+
+# 12 a. check character encoding of the files
+bash-4.4$ file  downloaded_tweets_extend_nolf.ASCII.CLEAN.tsv
+downloaded_tweets_extend_nolf.ASCII.CLEAN.tsv: ASCII text, with very long lines, with CRLF line terminators
+
+bash-4.4 $ file downloaded_tweets_extend_original_ids_nolf.ASCII.CLEAN.tsv
+downloaded_tweets_extend_original_ids_nolf.ASCII.CLEAN.tsv: ASCII text, with very long lines, with CRLF line terminators
+
+
+
+# 13. check column names in both files
+bash-4.4 $ head -n 1 downloaded_tweets_extend_nolf.ASCII.CLEAN.tsv
+id      author  date    hashtags        text    referenced      in_reply_to_user_id     public_metrics
+
+bash-4.t $ head -n 1 downloaded_tweets_extend_original_ids_nolf.ASCII.CLEAN.tsv
+id      author  date    hashtags        text    referenced      in_reply_to_user_id     public_metrics
+
+# 13a. unique users tweeted
+bash-4.4$ awk -F'\t' '{print $2}' downloaded_tweets_extend_nolf.ASCII.CLEAN.tsv | sort | uniq | wc -l
+390
+
+bash-4.4$ awk -F'\t' '{print $2}' downloaded_tweets_extend_original_ids_nolf.ASCII.CLEAN.tsv | sort | uniq | wc -l
+43071
+
+# for both files
+bash-4.4$ awk -F'\t' '{print $2}' downloaded_tweets_extend_nolf.ASCII.CLEAN.tsv downloaded_tweets_extend_original_ids_nolf.ASCII.CLEAN.tsv | sort | uniq | wc -l
+43371
+
+
+
+# 13b. number of tweeted id
+bash-4.4$ cut -f1 downloaded_tweets_extend_nolf.ASCII.CLEAN.tsv | sort | uniq | wc -l
+22926
+
+bash-4.4$ cut -f1 downloaded_tweets_extend_original_ids_nolf.ASCII.CLEAN.tsv | sort | uniq | wc -l
+145596
+
+# for both files
+bash-4.4$ cut -f1 downloaded_tweets_extend_nolf.ASCII.CLEAN.tsv downloaded_tweets_extend_original_ids_nolf.ASCII.CLEAN.tsv | sort | uniq | wc -l
+372633
+
+
+
+# 13c. No of unique hashtags
+bash-4.4$ cut -f4 downloaded_tweets_extend_nolf.ASCII.CLEAN.tsv | sort | uniq | wc -l
+60573
+
+bash-4.4$ cut -f4 downloaded_tweets_extend_original_ids_nolf.ASCII.CLEAN.tsv | sort | uniq | wc -l
+72565
+
+# for both files
+bash-4.4$ cut -f4 downloaded_tweets_extend_nolf.ASCII.CLEAN.tsv downloaded_tweets_extend_original_ids_nolf.ASCII.CLEAN.tsv | sort | uniq | wc -l
+103317
+
+bash-4.4$ exit
+Script done on 2024-09-10 03:41:31-04:00

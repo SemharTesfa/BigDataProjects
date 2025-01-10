@@ -1,0 +1,140 @@
+a3.txt
+Script started on 2024-10-06 22:33:24-04:00
+
+bash-4.4$ cp /mnt/scratch/CS131_billa/billandreopoulos/downloaded_tweets_extend_nolf.ASCII.CLEAN.tsv .
+bash-4.4$ cp /mnt/scratch/CS131_billa/billandreopoulos/downloaded_tweets_extend_original_ids_nolf.ASCII.CLEAN.tsv .
+bash-4.4$ ls
+
+
+bash-4.4$ grep type=retweeted downloaded_tweets_extend*_nolf.ASCII.CLEAN.tsv >> combined_retweets.txt
+bash-4.4$ vi combined_retweets.txt
+bash-4.4$ wc combined_retweets.txt
+  178045  4973384 56134862 combined_retweets.txt
+
+# 1 Create a retweets.txt network in the form of pairs of users (adjacency list)
+
+bash-4.4$ $ grep 'type=retweeted' downloaded_tweets_extend_*tsv | cut -f2,6 > retweets.txt
+bash-4.4$ head retweets.txt
+308045021 1513654494504136709
+308045021 1513774168348704770
+308045021 1519864927997075458
+308045021 1519742972186800130
+308045021 1519666326419218432
+308045021 1519450979204276227
+308045021 1519075500588687361
+308045021 1518733566590394368
+308045021 1518538452240900096
+308045021 1517876638461038592
+bash-4.4$ wc retweets.txt
+ 178045  356090 5953315 retweets.txt
+
+bash-4.4$ sort -k 2 retweets.txt -o retweets.txt
+bash-4.4$ head retweets.txt
+723757332 1001517432375316480
+631283641 1004656199885836288
+1493645432244695041 1006602334326095873
+3130247577 1010314471586369536
+790139850 1012937065317560321
+536646582 1016311771710283776
+940778288871542786 1017456403961835520
+790139850 1017953171589627905
+1387010761994682371 1023111834587607041
+2189523500 1023451913491107842
+
+
+
+# 2 Remove the lines containing bots
+bash-4.4$ awk '$1 != $2' retweets.txt > retweets_nobots.txt
+bash-4.4$ vi retweets_nobots.txt
+bash-4.4$ sort retweets_nobots.txt | uniq > retweets_nobots_uniq.txt
+
+
+# 3. Remove duplicate lines
+bash-4.4$ wc retweets_nobots_uniq.txt
+ 176301  352602 5895615 retweets_nobots_uniq.txt
+
+
+
+# 4. Find the user Bs (second field) in the retweets file from the previous step who got >=3 retweets overall, and those who got <3 retweets overall (from distinct users, since you removed redundant retweets and replies).
+
+bash-4.4$ awk '{count[$2]++} END {for (user in count) print user, count[user]}' retweets_nobots_uniq.txt > retweet_counts.txt
+bash-4.4$ awk '$2 >= 3 {print $1}' retweet_counts.txt > high_influence_retweets.txt
+bash-4.4$ awk '$2 < 3 {print $1}' retweet_counts.txt > low_influence_retweets.txt
+
+
+bash-4.4$ wc high_influence_retweets.txt
+  5806   5806 116119 high_influence_retweets.txt
+bash-4.4$ wc low_influence_retweets.txt
+ 139786  139786 2795598 low_influence_retweets.txt
+bash-4.4$ wc retweet_counts.txt
+ 145592  291184 3203271 retweet_counts.txt
+
+
+
+5) Separate the network file retweets_nobots_uniq.txt into the two subnetworks of the high or low influence users who got retweeted:
+
+bash-4.4$ grep -Ff high_influence_retweets.txt retweets_nobots_uniq.txt > retweets_nobots_uniq_highinfluence.txt
+
+bash-4.4$ grep -Ff low_influence_retweets.txt retweets_nobots_uniq.txt > retweets_nobots_uniq_lowinfluence.txt
+
+bash-4.4$ wc low_influence_retweets.txt
+ 139786  139786 2795598 low_influence_retweets.txt
+bash-4.4$ wc high_influence_retweets.txt
+  5806   5806 116119 high_influence_retweets.txt
+
+
+# 6
+# a. A- Count Distinct Users Who Got Retweeted
+bash-4.4$ awk '{print $2}' retweets_nobots_uniq_highinfluence.txt | sort | uniq | wc -l
+5806
+bash-4.4$ awk '{print $2}' retweets_nobots_uniq_lowinfluence.txt | sort | uniq | wc -l
+139786
+
+
+# b. Count Distinct Users Who Retweeted:
+bash-4.4$ awk '{print $1}' retweets_nobots_uniq_highinfluence.txt | sort | uniq | wc -l
+343
+bash-4.4$ awk '{print $1}' retweets_nobots_uniq_lowinfluence.txt | sort | uniq | wc -l
+384
+bash-4.4$
+
+# c. Find Top 10 Users Who Got Retweeted the Most
+bash-4.4$ awk '{count[$2]++} END {for (user in count) print count[user], user}' retweets_nobots_uniq_highinfluence.txt | sort -nr | head -10
+39 1492304803824762881
+34 1500465032966062082
+33 1505945634783830017
+31 1508985132601864193
+30 1516417858623967248
+30 1504214936234303496
+29 1496962695060459522
+29 1493952833846140935
+27 1496327528960737283
+26 1505801685423300610
+
+
+
+bash-4.4$ awk '{count[$2]++} END {for (user in count) print count[user], user}' retweets_nobots_uniq_lowinfluence.txt | sort -nr | head -10
+2 965315179838885899
+2 957867509335470080
+2 726172049861804032
+2 504651534198927361
+2 1520548004851519488
+2 1520546197936963584
+2 1520545040770437121
+2 1520542108033159168
+2 1520527917477998595
+2 1520472845746274304
+bash-4.4$ exit
+There are stopped jobs.
+bash-4.4$ exit
+Script done, file is a3.txt
+
+
+
+
+
+
+
+
+
+

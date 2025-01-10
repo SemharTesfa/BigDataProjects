@@ -1,0 +1,167 @@
+script a5.txt
+Script started, file is a5.txt
+
+# Prepare all the necessary files to create the two tables
+
+# A. for replies
+bash-4.4$ cp ~/downloaded_tweets_extend_original_ids_nolf.ASCII.CLEAN.tsv .
+downloaded_tweets_extend_original_ids_nolf.ASCII.CLEAN.tsv  userBcounts.txt
+bash-4.4$
+bash-4.4$ grep type=replied_to downloaded_tweets_extend_*tsv > all_replies.txt
+bash-4.4$ vi all_replies.txt
+bash-4.4$ awk -F "\t" 'BEGIN {OFS="\t"} {print $4,$6}' all_replies.txt > all_hashtags_replieids.txt
+bash-4.4$ sort -k2 all_hashtags_repliesids.txt > all_hashtags_replieids.sorted.txt
+bash-4.4$
+bash-4.4$ vi all_hashtags_replieids.sorted.txt
+
+bash-4.4$ sort -k 1 downloaded_tweets_extend_*tsv> replied_userBs.sorted.txt
+bash-4.4$ vi 
+bash-4.4$ sort -k 1 downloaded_tweets_extend_*tsv | awk 'BEGIN {OFS="\t"} {print $1, $2}' > replied_userBs.sorted.txt
+bash-4.4$ 
+
+bash-4.4$ join -t "    " -1 1 -2 2 replied_userBs.sorted.txt all_hashtags_replieids.sorted.txt | awk -F "\t" 'BEGIN {OFS="\t"} {print $1}' > all_replied.hashes.userB.txt
+bash-4.4$ vi all_hashtags_replieids.sorted.txt
+
+bash-4.4$ count_tweets_entire_dataset=`wc -l all_replies.txt | awk '{print $1}'`
+bash-4.4$ echo $count_tweets_entire_dataset
+30398
+
+
+
+
+# B. for retweets
+# for retweets
+bash-4.4$ grep type=retweeted downloaded_tweets_extend_*tsv > all_retweets.txt
+bash-4.4$ vi all_retweets.txt
+bash-4.4$ awk -F "\t" 'BEGIN {OFS="\t"} {print $4,$6}' all_retweets.txt > all_hashtags_retweetids.txt
+bash-4.4$ vi all_hashtags_retweetids.txt
+bash-4.4$
+bash-4.4$
+bash-4.4$ sort -k2 all_hashtags_retweetids.txt > all_hashtags_retweetids.sorted.txt
+bash-4.4$
+bash-4.4$ vi all_hashtags_retweetids.sorted.txt
+
+bash-4.4$ sort -k 1 downloaded_tweets_extend_original_ids_nolf.ASCII.CLEAN.tsv > retweeted_userBs.sorted.txt
+bash-4.4$ vi retweeted_userBs.sorted.txt
+bash-4.4$ sort -k 1 downloaded_tweets_extend_original_ids_nolf.ASCII.CLEAN.tsv | awk 'BEGIN {OFS="\t"} {print $1, $2}' > retweeted_userBs.sorted.txt
+bash-4.4$ vi retweeted_userBs.sorted.txt
+
+bash-4.4$ join -t "    " -1 1 -2 2 retweeted_userBs.sorted.txt all_hashtags_retweetids.sorted.txt | awk -F "\t" 'BEGIN {OFS="\t"} {print $1}' > all_retweeted.hashes.userB.txt
+join: all_hashtags_retweetids.sorted.txt:575: is not sorted: RepublicanXXXXXXPredators  1400500272170864641
+bash-4.4$ vi all_hashtags_retweetids.sorted.txt
+
+bash-4.4$ count_tweets_entire_dataset=`wc -l all_retweets.txt | awk '{print $1}'`
+bash-4.4$ echo $count_tweets_entire_dataset
+178045
+bash-4.4$
+
+
+
+# Create Tables
+# 1. This is for the replies_hashtag_freqs.tsv 
+
+bash-4.4$ for userb in `cat replies_userBs.txt` ; do hashtags=`egrep $userb replies_userBs_hashtags.txt | awk '{print $1}' | sed 's/"//g' | tr "," "\n"` ; for h in $hashtags ; do count_H_in_C=`egrep $userb replies_userBs_hashtags.txt | awk '{print $1}' | tr "," "\n" | egrep $h | wc -l` ; count_tweets_in_C=`egrep $userb replies_userBs_hashtags.txt | wc -l` ; count_H_entire_dataset=`egrep $h replies_hashtags.txt | wc -l` ; count_tweets_entire_dataset=`wc -l all_replies.txt | awk '{print $1}'`; relative_frequency_H_C=`echo "scale=2; $count_H_in_C / $count_H_entire_dataset" | bc` ;
+> frequency_H_C=`echo "scale=2; $count_H_in_C / $count_tweets_in_C" | bc` ; frequency_H_overall=`echo "scale=2; $count_H_entire_dataset / $count_tweets_entire_dataset" | bc` ; echo $h $userb $relative_frequency_H_C $frequency_H_C $frequency_H_overall $count_H_in_C $count_tweets_in_C $count_H_entire_dataset $count_tweets_entire_dataset ; done ; done > replies_hashtag_freqs.tsv
+
+
+# 2. This is for retweets_hashtag_freqs.tsv
+
+for userb in `cat retweets_userBs.txt` ; do hashtags=`egrep $userb all_retweeted.hashes.userB.txt | awk '{print $2}' | sed 's/"//g' | tr "," "\n"` ; for h in $hashtags ; do count_H_in_C=`egrep $userb all_retweeted.hashes.userB.txt | awk '{print $2}' | tr "," "\n" | egrep $h | wc -l` ; count_tweets_in_C=`egrep $userb all_retweeted.hashes.userB.txt | wc -l` ; count_H_entire_dataset=`egrep $h all_retweeted.hashes.userB.txt | wc -l` ; count_tweets_entire_dataset=`wc -l all_retweets.txt | awk '{print $1}'`; relative_frequency_H_C=`echo "scale=2; $count_H_in_C / $count_H_entire_dataset" | bc` ; > frequency_H_C=`echo "scale=2; $count_H_in_C / $count_tweets_in_C" | bc` ; frequency_H_overall=`echo "scale=2; $count_H_entire_dataset / $count_tweets_entire_dataset" | bc` ; echo $h $userb $relative_frequency_H_C $frequency_H_C $frequency_H_overall $count_H_in_C $count_tweets_in_C $count_H_entire_dataset $count_tweets_entire_dataset ; done ; done > retweets_hashtag_freqs.tsv
+
+
+# create two separate Bash shell scripts (freqs_replies.sh and freqs_retweets.sh) that handle processing hashtags for replies and retweets respectively.
+
+bash-4.4$ nano freqs_replies.sh
+bash-4.4$ nano freqs_retweets.sh
+bash-4.4$
+
+# Run the Scripts
+bash-4.4$ ./freqs_replies.sh replies_userBs.txt replies_userBs_hashtags.txt replies_hashtags.txt
+bash-4.4$ ./freqs_retweets.sh retweets_userBs.txt all_retweeted.hashes.userB.txt all_retweets.txt
+
+bash-4.4$ ./freqs_replies.sh replies_userBs.txt replies_userBs_hashtags.txt replies_hashtags.txt > replies_hashtag_freqs.tsv
+bash-4.4$ ./freqs_retweets.sh retweets_userBs.txt all_retweeted.hashes.userB.txt all_retweets.txt > retweets_hashtag_freqs.tsv
+
+
+
+
+# Compare the 20 most frequent hashtags
+# Extract and Sort Hashtags
+# This would count occurrences of each unique hashtag in the file
+
+bash-4.4$
+bash-4.4$ cut -f1 retweets_hashtag_freqs.tsv | sort | uniq -c | sort -nr | head -n20 > top_20_retweets_hashtags.tsv
+bash-4.4$ cut -f1 replies_hashtag_freqs.tsv | sort | uniq -c | sort -nr | head -n20 > top_20_replies_hashtags.tsv
+bash-4.4$
+
+
+# Analyze the Top Hashtags and Observations
+bash-4.4$
+bash-4.4$ head top_20_retweets_hashtags.tsv
+    116 Russia 105327432 .02 .04 .02 117 128 4700 178045
+     42 StandWithUkraine 163018653 .17 .04 0 181 516 1016 178045
+     22 YachtWatch 1336824516 .84 .04 0 22 22 26 178045
+     17 RussiaGoHome 163018653 .89 .04 0 25 516 28 178045
+     16 Ukraine 105327432 0 .04 .04 22 128 7844 178045
+     14 StandWithUkriane 163018653 .13 .04 0 18 516 134 178045
+     11 BanFoxFromBases 1205226529455632385 .40 .04 0 11 62 27 178045
+     10 SOTU 1351284403801108481 .03 .04 0 10 10 283 178045
+      8 Ukraine 1171109054 0 .04 .04 8 13 7844 178045
+      8 TuckyoRose 105327432 .53 .04 0 8 128 15 178045
+bash-4.4$
+bash-4.4$
+bash-4.4$ head top_20_replies_hashtags.tsv
+     20 WritingCommunity 1044285651812839424 .45 .04 0 33 229 72 30398
+     13 writerslift 1044285651812839424 .66 .04 0 34 229 51 30398
+     12 books 1044285651812839424 .69 .04 0 51 229 73 30398
+     10 book 1044285651812839424 .60 .04 0 122 229 202 30398
+      9 KindleUnlimited 1044285651812839424 .62 .04 0 22 229 35 30398
+      9 fantasy 1044285651812839424 .65 .04 0 21 229 32 30398
+      9 BookRecommendations 1044285651812839424 .71 .04 0 15 229 21 30398
+      8 erotica 1044285651812839424 1.00 .04 0 11 229 11 30398
+      7 scifi 1044285651812839424 .71 .04 0 15 229 21 30398
+      6 Romance 1044285651812839424 .72 .04 0 13 229 18 30398
+bash-4.4$
+
+
+# Observations
+
+Replies: The top reply hashtags are largely centered around writing and books, such as "WritingCommunity", "books", and "KindleUnlimited". This shows a community-centric dialogue revolving around personal interests and hobbies. I observed replies are used to engage in discussions related to personal passions and professional fields like writing and publishing.
+
+Retweets: The top retweet hashtags focus significantly on geopolitical themes, such as "Russia", "StandWithUkraine", and "PutinHitler". This indicates a focus on current events and international relations. I observed retweets seem to be used to spread awareness or express solidarity/opposition regarding global and political issues.
+
+
+# To find which hashtags appear in the clusters we create a List of Overall Frequent Hashtags
+# For Retweets Hashtags
+bash-4.4$ awk -F '"' '{gsub(/,/, "\n", $2); print $2}' all_hashtags_retweetids.txt | tr '[:upper:]' '[:lower:]' | sort | uniq -c | sort -nr > unique_retweets_hashtag_freqs.tsv
+bash-4.4$ vi unique_retweets_hashtag_freqs.tsv
+
+# For Replies Hashtags
+bash-4.4$ cat replies_hashtags.txt | tr '[:upper:]' '[:lower:]' | sort | uniq -c | sort -nr > unique_replies_hashtag_freqs.tsv
+bash-4.4$
+bash-4.4$ vi unique_replies_hashtag_freqs.tsv
+bash-4.4$
+
+# Analysis of Unique Hashtags in Retweets and Replies
+
+# Retweets: Hashtags like watergate, wikileaks, and brexit in retweets indicate a focus on broad public interests and news-related topics, suggesting their use for spreading information on significant events.
+# Replies: More varied topics like evusheld, zurichinnovates, and ukraineunderattack in replies point to direct interactions focused on specific, community-centric issues.
+# Cultural and Linguistic Diversity: The use of non-Latin hashtags underscores the global and diverse nature of the discussions, representing a wide range of cultural and linguistic backgrounds.
+
+bash-4.4$ exit
+Script done, file is a5.txt
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

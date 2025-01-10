@@ -1,0 +1,30 @@
+  985  cd131
+  986  cd cs131
+  987  ls
+  988  cs ws5
+  989  cs WS5
+  990  cd WS5
+  991  ls
+  992  vi ws5.txt
+  993  vi i
+  994  vi gettweetbydate.sh
+  995  vi latesttweets.sh
+  996  vi crontab -e
+  997  cd cs131
+  998  ls
+  999  cp -r WS5 WS51
+ 1000  ls
+ 1001  cd WS5
+ 1002  ls
+ 1003  vi downloaded_tweets_extend_nolf.ASCII.CLEAN.tsv
+ 1004  vi downloaded_tweets_extend_original_ids_nolf.ASCII.CLEAN.tsv
+ 1005  rm ws5.txt
+ 1006  script ws5.txt
+ 1007  history > cmds.log
+ 1009  vi cmds.log
+ 1010  history > cmds.log
+ 1011  vi cmds.log
+ 1012  history tail > cmds.log
+ 1013  history 15 > cmds.log
+ 1014  vi cmds.log
+ 1016  history 20 > cmds.log
